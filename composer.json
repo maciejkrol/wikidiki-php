@@ -1,0 +1,23 @@
+{
+    "name": "maciejkrol/wikidiki",
+    "description": "WikiDiki lets you translate words (mostly nouns) across multiple languages based on wikipedia.org",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Maciej Król",
+            "email": "mail@maciejkrol.pl",
+            "role": "Developer"
+        }
+    ],
+    "require": {},
+    "keywords": [
+        "wikipedia",
+        "translation",
+        "wikidiki"
+    ],
+    "autoload": {
+        "psr-4": {
+            "maciejkrol\\wikidiki\\": "src"
+        }
+    }
+}
