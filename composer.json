@@ -2,6 +2,7 @@
     "name": "maciejkrol/wikidiki",
     "description": "WikiDiki lets you translate words (mostly nouns) across multiple languages based on wikipedia.org",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Maciej Król",
