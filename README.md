@@ -2,6 +2,16 @@
 
 WikiDiki uses [Wikipedia](https://wikipedia.org/) to translate words across multiple languages.
 
+## Installation
+
+[![Total Downloads](https://poser.pugx.org/maciejkrol/wikidiki/downloads)](https://packagist.org/packages/maciejkrol/wikidiki)
+
+You can install the library using composer.
+
+```
+composer require maciejkrol/wikidiki
+```
+
 ## Basic usage
 
 WikiDiki usage is super simple.
