@@ -80,6 +80,7 @@ class wikidiki {
      */
     private function cleanTerm ($_term) {
         $_term = urldecode ($_term);
+        $_term = str_replace ('_', '', $_term);
 
         return $_term;
     }
