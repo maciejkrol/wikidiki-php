@@ -4,7 +4,7 @@ WikiDiki uses [Wikipedia](https://wikipedia.org/) to translate words across mult
 
 ## Installation
 
-[![Total Downloads](https://poser.pugx.org/maciejkrol/wikidiki/downloads)](https://packagist.org/packages/maciejkrol/wikidiki)
+[![Total Downloads](https://poser.pugx.org/maciejkrol/wikidiki/version)](https://packagist.org/packages/maciejkrol/wikidiki)
 
 You can install the library using composer.
 
@@ -53,3 +53,12 @@ $translated = $wikidiki->translate($word, $language, $to);   //array
 ```
 
 In case WikiDiki can't find a translation ``null`` will be returned;
+
+From now on you can get search suggestions:
+
+```PHP
+$word       =   'Tea';
+$language   =   'en';
+
+$translated = $wikidiki->suggest($word, $language, $to);   //array
+```
