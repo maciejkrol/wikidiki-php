@@ -18,9 +18,8 @@ class wikidiki {
      * @return string|array|null
      */
     public function translate ($_term, $_from, $_to = null) {
-
-        $url = $this->buildUrl ($_from, $_term);
-        $html = $this->download ($url);
+        $url    = $this->buildArticleUrl ($_from, $_term);
+        $html   = $this->download ($url);
 
         if ($html === null) {
             return null;
@@ -44,6 +43,21 @@ class wikidiki {
     }
 
     /**
+     * Suggests terms similar to the given in the given language.
+     * @param string $_term
+     * @param string $_language
+     * @param int $_limit
+     * @return array
+     */
+    public function suggest ($_term, $_language, $_limit = 20) {
+        $url            = $this->buildSearchUrl ($_language, $_term, $_limit);
+        $json           = $this->download ($url);
+        $suggestions    = json_decode ($json);
+
+        return $suggestions[1];
+    }
+
+    /**
      * Extracts all results from a given HTML.
      * @param string $_html
      * @return array
@@ -61,7 +75,7 @@ class wikidiki {
         for ($i = 0; $i < count($matches[0]); $i++) {
             $lang           = $matches[4][$i];
             $href           = $matches[2][$i];
-            $translation    = str_replace ($this->buildURL ($lang), '', $href);
+            $translation    = str_replace ($this->buildArticleUrl ($lang), '', $href);
             $translation    = $this->cleanTerm ($translation);
             
             if ($translation !== null) {
@@ -86,13 +100,32 @@ class wikidiki {
     }
 
     /**
-     * Build valid Wikipedia url for a given language and term.
+     * Build valid Wikipedia article url for a given language and term.
      * @param string $_lang
      * @param string $_term
      * @return string
      */
-    private function buildUrl ($_lang, $_term = '') {
+    private function buildArticleUrl ($_lang, $_term = '') {
         return 'https://'.$_lang.'.wikipedia.org/wiki/'.$_term;
+    }
+
+    /**
+     * Build valid Wikipedia search url for a given language and term.
+     * @param string $_lang
+     * @param string $_term
+     * @return string
+     */
+    private function buildSearchUrl ($_lang, $_term, $_limit = 20) {
+        $args = [
+            'search'        =>  $_term,
+            'limit'         =>  $_limit,
+            'action'        =>  'opensearch',
+            'format'        =>  'json',
+            'formatversion' =>  2,
+            'namespace'     =>  0,
+        ];
+
+        return 'https://'.$_lang.'.wikipedia.org/w/api.php?'.http_build_query ($args);
     }
 
     /**
